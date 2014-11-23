@@ -5,22 +5,23 @@
 
 	class HSMS {
 
-		private $id;
-		private $desc;
-		private $number;
-		private $price;
-		private $organisation;
-		private $web;
-		private $priority;
-		private $remark;
+		public $id;
+		public $desc;
+		public $number;
+		public $price;
+		public $status;
+		public $organisation;
+		public $web;
+		public $priority;
+		public $remark;
 
 		public function getId() {
 			return $this->id;
 		}
 
-		// public function setId($id) {
-		// 	$this->id = $id;
-		// }
+		public function setId($id) {
+			$this->id = $id;
+		}
 
 		public function getDesc() {
 			return $this->desc;
@@ -44,6 +45,14 @@
 
 		public function setPrice($price) {
 			$this->price = $price;
+		}
+
+		public function getStatus() {
+			return $this->status;
+		}
+
+		public function setStatus($status) {
+			$this->status = $status;
 		}
 
 		public function getOrganisation() {

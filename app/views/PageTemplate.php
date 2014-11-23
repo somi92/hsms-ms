@@ -32,6 +32,10 @@
 		public function showTable($data) {
 
 		}
+
+		public function loadHSMSAddForm() {
+
+		}
 	}
 
 ?>

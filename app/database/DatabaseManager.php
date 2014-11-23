@@ -23,7 +23,8 @@
 				exit();
 			}
 
-			$this->connection->set_charset("utf8");
+			// $this->connection->set_charset("utf8");
+			mysqli_set_charset($this->connection, 'utf8');
 		}
 
 		public function executeQuery($sql) {	

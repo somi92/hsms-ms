@@ -20,15 +20,18 @@ view/data/index:
   	<?php 
 
   		if(isset($_SESSION['auth_user'])) {
-        $user = $_SESSION['auth_user'];
-        echo "Session active, logged in as ".$user->getName();
+	        $user = $_SESSION['auth_user'];
+	        echo "Session active, logged in as ".$user->getName();
 
-        echo '</br></br></br><a href="/HSMS-MS/public/data/view/hsms">Humanitarne akcije</a>';
-        echo '</br><a href="/HSMS-MS/public/data/view/org">Organizacije</a>';
-        echo '</br><a href="/HSMS-MS/public/data/view/users">Upravljanje korisnicima</a>';
+	        echo '</br></br></br><a href="/HSMS-MS/public/data/view/hsms">Humanitarne akcije</a>';
+	        echo '</br><a href="/HSMS-MS/public/data/view/org">Organizacije</a>';
+	        echo '</br><a href="/HSMS-MS/public/data/view/users">Upravljanje korisnicima</a>';
 
-        echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
-      }
+	        echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
+	     } else {
+	      	echo '</br><p>Nemate pristup.</p>';
+	      	echo '</br><a href="/HSMS-MS/public/home/index">Login</a>';
+	     }
 
   	?>
 
