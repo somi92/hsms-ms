@@ -121,6 +121,20 @@
 			return json_encode($data["organisations"]);
 		}
 
+		public static function delete($targetTable, $rowId) {
+
+			$db = new DatabaseManager();
+			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			$sql = "delete from ".$targetTable." where hb_id = ".$rowId.";";
+
+			if($db->executeQuery($sql) == false) {
+				return false;
+			}
+			return true;
+		}
+
+
 	}
 
 ?>

@@ -67,6 +67,15 @@
 		public function delete($data) {
 			// call model and update data
 			// call view and update ui
+			if(!isset($_POST['delete_id']) || !isset($_POST['delete_table'])) {
+				echo "ERROR";
+				return;
+			} else {
+				$table = $_POST['delete_table'];
+				$id = $_POST['delete_id'];
+				$this->getModel('ModelBroker');
+				ModelBroker::delete($table,$id);
+			}
 		}
 	}
 

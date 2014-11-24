@@ -16,6 +16,28 @@ view/data/hsms:
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
   <script type="text/javascript" charset="utf8" src="../../../public/js/session.js"></script>
 
+  <script type="text/javascript">
+      //   (function( $ ){
+      //       div_org_load();
+      // })( jQuery );
+      $(document).ready(function() {
+        $.post("/HSMS-MS/public/data/query",{
+                  query_target: "ORGANIZACIJA"
+                  },function(data){
+                    // alert(data);
+                    $.session.set("org_data",data);
+                    var obj = jQuery.parseJSON(data);
+                    for(var i=0; i<obj.length; i++) {
+                      var node = document.createElement("OPTION");
+                      node.setAttribute("value",obj[i]['id']);
+                      var textnode = document.createTextNode(obj[i]['name']+"");
+                      node.appendChild(textnode);
+                      document.getElementById("organisation").appendChild(node);
+                    } 
+                  });  
+      });
+    </script>
+
   <head>
     <title>HSMS Management System</title>
   </head>
@@ -90,6 +112,7 @@ view/data/hsms:
         $json = json_encode($data);
         // var_dump($json);
         echo '<button id="popup" onclick="div_show()">Dodaj novu akciju</button>';
+        echo '<button id="btn_delete">Obrisi</button>';
         echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
       }
 
@@ -133,15 +156,16 @@ view/data/hsms:
 //Function To Display Popup
 function div_show() {
   document.getElementById('abc').style.display = "block";
+  // document.getElementById('organisation').inner
 }
 
 function div_org_load() {
-    $.post("/HSMS-MS/public/data/query",{
-                  query_target: "ORGANIZACIJA"
-                  },function(data){
-                    alert(data);
-                    $.session.set("org_data",data);
-                  });  
+    // $.post("/HSMS-MS/public/data/query",{
+    //               query_target: "ORGANIZACIJA"
+    //               },function(data){
+    //                 alert(data);
+    //                 $.session.set("org_data",data);
+    //               });  
 }
 //Function to Hide Popup
 function div_hide(){
@@ -151,6 +175,8 @@ function div_hide(){
     </script>
 
     <script type="text/javascript">
+
+    var table;
     var arr = <?php echo json_encode($data["actions"]) ?>;
       $(document).ready(function() {
 
@@ -188,11 +214,53 @@ function div_hide(){
     // }
     //         }
     //     });
+
+       $('#hsms tbody').on( 'click', 'tr', function () {
+              if ( $(this).hasClass('selected') ) {
+                  $(this).removeClass('selected');
+              }
+              else {
+                  table.$('tr.selected').removeClass('selected');
+                  $(this).addClass('selected');
+              }
+          } );
+       
+          $('#btn_delete').click( function () {
+              // table.row('.selected').remove().draw( false );
+              if(table.row('.selected').data() == null) {
+                  alert("Izaberite red tabele koji zelite izbrisati.");
+              } else {
+                if(window.confirm("Jeste li sigurni?")) {
+                  var id = table.row('.selected').data().id;
+                  $.post("/HSMS-MS/public/data/delete",{
+                    delete_table: "HUMANITARNI_BROJ",
+                    delete_id: id
+                },
+
+                function(data) {
+                  // alert(data);
+                  // document.getElementById('form').submit();
+                  // $(document).loadTable();
+                  // if(data == "ok") {
+                    table.row('.selected').remove().draw( false );
+                    // alert("OKKKKKKK");
+                  // } else {
+                    // alert("ERROOOR");
+                  // }
+                });
+                }
+                // alert(table.row('.selected').data().remark);
+                
+              }
+              
+          } );
       });
+
+      
 
       (function( $ ){
          $.fn.loadTable = function() {
-            $('#hsms').DataTable({
+            table = $('#hsms').DataTable({
             retrieve: true,
             data: arr,
             columns: [
@@ -256,19 +324,9 @@ function div_hide(){
     <input id="status" name="status" placeholder="Status" type="text">
     <!-- <input id="organisation" name="organisation" placeholder="Organizacija" type="text"> -->
     <p>Organisation</p>
-    <script type="text/javascript">
-        (function( $ ){
-            div_org_load();
-      })( jQuery );
-    </script>
+    
     <select id="organisation" name="organisation" placeholder="Organisation">
-        <?php
-            $org_json = json_decode($_SESSION["org_data"], true);
-            unset($_SESSION["org_data"]);
-            foreach($org_json as $k=>$v) {
-              echo '<option value="'.$v->getId().'">'.$v->getName.'</option>';
-            }
-        ?>
+        
     </select>
     <p>Prioritet</p>
     <select id="priority" name="priority" placeholder="Prioritet">
