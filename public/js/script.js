@@ -38,6 +38,12 @@ function div_show() {
 
     function(data){
       // alert(data);
+
+      var orgNode = document.getElementById("organisation");
+			while (orgNode.firstChild) {
+    		orgNode.removeChild(orgNode.firstChild);
+			}
+
       var obj = jQuery.parseJSON(data);
       for(var i=0; i<obj.length; i++) {
         var node = document.createElement("OPTION");
@@ -115,13 +121,13 @@ $(document).ready(function() {
 			alert("Izaberite red tabele koji zelite izmeniti.");
 		} else {
 				
-				// alert(table.row('.selected').data().web);
+				// alert(table.row('.selected').data().organisation);
 				var id = table.row('.selected').data().id;
 				var desc = table.row('.selected').data().desc;
 				var number = table.row('.selected').data().number;
 				var price = table.row('.selected').data().price;
 				var status = table.row('.selected').data().status;
-				var organisation = table.row('.selected').data().organisation;
+				var selectedOrganisation = table.row('.selected').data().organisation;
 				var web = table.row('.selected').data().web;
 				var priority = table.row('.selected').data().priority;
 				var remark = table.row('.selected').data().remark;
@@ -130,10 +136,40 @@ $(document).ready(function() {
 	      $("#number").val(number);
 	      $("#price").val(price);
 	      $("#status").val(status);
-	      $("#organisation").val(organisation);
+	      // $("#organisation").text(organisation);
 	      $("#priority").val(priority);
 	      $("#remark").val(remark);
-	      div_show();
+
+	      // div_show();
+	      document.getElementById('abc').style.display = "block";
+	      $.post("/HSMS-MS/public/data/query",{
+      query_target: "ORGANIZACIJA"
+    },
+
+    function(data){
+
+      var orgNode = document.getElementById("organisation");
+			while (orgNode.firstChild) {
+    		orgNode.removeChild(orgNode.firstChild);
+			}
+
+      var obj = jQuery.parseJSON(data);
+      for(var i=0; i<obj.length; i++) {
+        var node = document.createElement("OPTION");
+        node.setAttribute("value",obj[i]['id']);
+        var textnode = document.createTextNode(obj[i]['name']+"");
+        node.appendChild(textnode);
+        document.getElementById("organisation").appendChild(node);
+      } 
+
+      	for(var i=0; i<orgNode.options.length; i++) {
+					if(orgNode.options[i].text == selectedOrganisation) {
+						orgNode.selectedIndex = i;
+						break;
+					}
+				}
+    });  
+
 		}
 	});
 });
