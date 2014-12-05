@@ -134,7 +134,23 @@
 			return true;
 		}
 
+		public static function updateHSMS($targetTable, $data) {
 
+			$db = new DatabaseManager();
+			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			
+			$sql = "update ".$targetTable." set 
+					opis = '".$data['desc']."', broj = '".$data['number']."',
+					cena = '".$data['price']."', hb_status = '".$data['status']."',
+					prioritet = ".$data['priority'].", napomena = '".$data['remark']."',
+					org_id = ".$data['organisation']."
+					where hb_id = ".$data['id'].";";
+			$db->executeQuery($sql);
+
+			$result = self::loadAllHSMS();
+			return json_encode($result["actions"]);
+
+		}
 	}
 
 ?>

@@ -1,5 +1,11 @@
-function check_empty() {
-      
+function check_empty(action="", update_id="") {
+	var target = "";
+  if(action=="insert") {
+  	target = "/HSMS-MS/public/data/insert";
+  }
+  if(action=="update") {
+  	target = "/HSMS-MS/public/data/update";
+  }
   if (document.getElementById('desc').value == "" || document.getElementById('number').value == "" || document.getElementById('price').value == "") {
     alert("Morate popuniti opis, broj i cenu!");
   } else {
@@ -11,7 +17,8 @@ function check_empty() {
       var priorityF = $("#priority").val();
       var remarkF = $("#remark").val();
 
-      $.post("/HSMS-MS/public/data/insert",{
+      $.post(target,{
+      		id: update_id, 
           desc: descF,
           number: numberF,
           price: priceF,
@@ -87,8 +94,15 @@ $(document).ready(function() {
         $(this).addClass('selected');
       }
   } );
-         
-  $('#btn_delete').click( function () {
+  
+  $('#btn_insert').click(function() {
+  	div_show();
+  	var btn_submit = document.getElementById('submit');
+  	btn_submit.setAttribute('href','javascript:%20check_empty(\'insert\')');
+  	btn_submit.innerHTML = "UNESI";
+  });
+
+  $('#btn_delete').click( function() {
     // table.row('.selected').remove().draw( false );
     if(table.row('.selected').data() == null) {
       alert("Izaberite red tabele koji zelite izbrisati.");
@@ -142,34 +156,36 @@ $(document).ready(function() {
 
 	      // div_show();
 	      document.getElementById('abc').style.display = "block";
-	      $.post("/HSMS-MS/public/data/query",{
-      query_target: "ORGANIZACIJA"
-    },
+	      	$.post("/HSMS-MS/public/data/query",{
+      		query_target: "ORGANIZACIJA"
+    		},
 
-    function(data){
+		    function(data){
 
-      var orgNode = document.getElementById("organisation");
-			while (orgNode.firstChild) {
-    		orgNode.removeChild(orgNode.firstChild);
-			}
-
-      var obj = jQuery.parseJSON(data);
-      for(var i=0; i<obj.length; i++) {
-        var node = document.createElement("OPTION");
-        node.setAttribute("value",obj[i]['id']);
-        var textnode = document.createTextNode(obj[i]['name']+"");
-        node.appendChild(textnode);
-        document.getElementById("organisation").appendChild(node);
-      } 
-
-      	for(var i=0; i<orgNode.options.length; i++) {
-					if(orgNode.options[i].text == selectedOrganisation) {
-						orgNode.selectedIndex = i;
-						break;
+		      var orgNode = document.getElementById("organisation");
+					while (orgNode.firstChild) {
+		    		orgNode.removeChild(orgNode.firstChild);
 					}
-				}
-    });  
 
+		      var obj = jQuery.parseJSON(data);
+		      for(var i=0; i<obj.length; i++) {
+		        var node = document.createElement("OPTION");
+		        node.setAttribute("value",obj[i]['id']);
+		        var textnode = document.createTextNode(obj[i]['name']+"");
+		        node.appendChild(textnode);
+		        document.getElementById("organisation").appendChild(node);
+		      } 
+
+		      	for(var i=0; i<orgNode.options.length; i++) {
+							if(orgNode.options[i].text == selectedOrganisation) {
+								orgNode.selectedIndex = i;
+								break;
+							}
+						}
+		    });  
+	      var btn_submit = document.getElementById('submit');
+  			btn_submit.setAttribute('href','javascript:%20check_empty(\'update\', '+id+')');
+  			btn_submit.innerHTML = "IZMENI";
 		}
 	});
 });

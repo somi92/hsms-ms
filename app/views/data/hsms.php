@@ -88,8 +88,8 @@ view/data/hsms:
         </table></div>';
         // $obj = $data["actions"];
         // $json = json_encode($data);
-        echo '<button id="popup" onclick="div_show()">Dodaj novu akciju</button>';
-        echo '<button id="btn_update" >Izmeni</button>';
+        echo '<button id="btn_insert">Dodaj novu akciju</button>';
+        echo '<button id="btn_update">Izmeni</button>';
         echo '<button id="btn_delete">Obrisi</button>';
         echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
       }
