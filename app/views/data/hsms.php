@@ -1,7 +1,9 @@
 view/data/hsms:
 <?php 
-  // require_once "../app/views/PageTemplate.php";
+  require_once "../app/views/PageTemplate.php";
   require_once "../app/models/User.php";
+
+  $pt  = new PageTemplate();
 
   if(!isset($_SESSION)) {
     session_start();
@@ -22,16 +24,17 @@ view/data/hsms:
 
   <body>
 
-  	<h1>Data Management</h1>
-
   	<?php 
 
   		if(isset($_SESSION['auth_user'])) {
+
         $user = $_SESSION['auth_user'];
-        echo "Session active, logged in as ".$user->getName();
-        echo "</br><a href='/HSMS-MS/public/home/index'>Pocetna</a>";
-        echo '<div style="width: 70%; margin: auto; border: blue 1px solid">
-            <table id="hsms" class="display compact" cellspacing="0" style="font-size: 13px; z-index: 2;">
+        $pt->showHeader("Korisnik: ".$user->getName());
+        // echo "Session active, logged in as ".$user->getName();
+
+        // echo '<img src="../app/views/res/logo.png" />';
+        echo '<div id="content"><div style="width: 95%; margin: auto; border: blue 0px solid">
+            <table id="hsms" class="display compact" cellspacing="0" style="font-size: 15px; z-index: 2;">
             <tbody>';
 
             echo '<thead>
@@ -88,10 +91,12 @@ view/data/hsms:
         </table></div>';
         // $obj = $data["actions"];
         // $json = json_encode($data);
-        echo '<button id="btn_insert">Dodaj novu akciju</button>';
+        echo '<div id="button_panel"><button id="btn_insert">Dodaj novu akciju</button>';
         echo '<button id="btn_update">Izmeni</button>';
-        echo '<button id="btn_delete">Obrisi</button>';
-        echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
+        echo '<button id="btn_delete">Obrisi</button></div>';
+        // echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a></div>';
+      } else {
+          $pt->showHeader();
       }
 
   	?>
@@ -105,7 +110,7 @@ view/data/hsms:
     
       <div id="popupContact">
         <form action="" id="form" method="post" name="form">
-          <img id="close" src="images/3.png" onclick ="div_hide()">
+          <img id="close" src="" onclick ="div_hide()">
           <h2>Unesite novu humanitarnu akciju</h2>
           <hr>
           <input id="desc" name="desc" placeholder="Opis" type="text">
@@ -113,7 +118,7 @@ view/data/hsms:
           <input id="price" name="price" placeholder="Cena" type="text">
           <input id="status" name="status" placeholder="Status" type="text">
           <!-- <input id="organisation" name="organisation" placeholder="Organizacija" type="text"> -->
-          <p>Organisation</p>
+          <p>Organizacija</p>
           
           <select id="organisation" name="organisation" placeholder="Organisation">
               

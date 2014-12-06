@@ -1,4 +1,4 @@
-function check_empty(action="", update_id="") {
+function check_empty(action, update_id) {
 	var target = "";
   if(action=="insert") {
   	target = "/HSMS-MS/public/data/insert";

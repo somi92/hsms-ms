@@ -2,8 +2,24 @@
 
 	class PageTemplate {
 
-		public function showHeader() {
-			echo "<h1>HSMS Management System</h1>";
+		public function showHeader($data = "") {
+			$logout = "";
+			$navigation = "";
+			if($data != "") {
+				$logout = "<a href='/HSMS-MS/public/home/logout'>Logout</a>";
+				$navigation = "<div id='navbar'>
+									<div class='nav_button'><a href='/HSMS-MS/public/home/index'>Pocetna</a></div>
+								</br>";
+			}
+			echo "<div id='header'>
+					<img id='logo' src=\"../../../app/views/res/logo.png\" alt=\"ERORR\" />
+					<h1 id='header_title'>HSMS Management System</h1>
+					<div id='user_session'>
+						<p>".$data."</p></br></br></br>
+						".$logout."
+					</id>
+				</div>";
+			echo $navigation;
 		}
 
 		public function showFooter() {
