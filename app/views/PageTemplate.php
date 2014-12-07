@@ -8,7 +8,8 @@
 			if($data != "") {
 				$logout = "<a href='/HSMS-MS/public/home/logout'>Logout</a>";
 				$navigation = "<div id='navbar'>
-									<div class='nav_button'><a href='/HSMS-MS/public/home/index'>Pocetna</a></div>
+									<div class='nav_button'><a href='/HSMS-MS/public/home/index'>Pocetna</a>
+								</div>
 								</br>";
 			}
 			echo "<div id='header'>
@@ -23,7 +24,7 @@
 		}
 
 		public function showFooter() {
-
+			echo "<div id='footer'><p>Copyright HSMS Management System</p></div>";
 		}
 
 		public function showWelcome() {

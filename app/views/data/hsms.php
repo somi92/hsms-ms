@@ -93,24 +93,24 @@ view/data/hsms:
         // $json = json_encode($data);
         echo '<div id="button_panel"><button id="btn_insert">Dodaj novu akciju</button>';
         echo '<button id="btn_update">Izmeni</button>';
-        echo '<button id="btn_delete">Obrisi</button></div>';
+        echo '<button id="btn_delete">Obrisi</button></div></div>';
+        $pt->showFooter();
         // echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a></div>';
       } else {
           $pt->showHeader();
       }
-
+      // $pt->showFooter();
   	?>
 
     <script type="text/javascript">
       var arr = <?php echo json_encode($data["actions"]) ?>;
-
     </script>
 
     <div id="abc">
     
       <div id="popupContact">
         <form action="" id="form" method="post" name="form">
-          <img id="close" src="" onclick ="div_hide()">
+          <img id="close" src="../../../app/views/res/close.png" height="48" width="48" onclick ="div_hide()">
           <h2>Unesite novu humanitarnu akciju</h2>
           <hr>
           <input id="desc" name="desc" placeholder="Opis" type="text">
