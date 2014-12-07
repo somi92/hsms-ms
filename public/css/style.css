@@ -1,5 +1,6 @@
 body {
 	background-image:url(../../app/views/res/bg.jpg);
+	background-attachment: fixed;
 }
 
 #abc {
