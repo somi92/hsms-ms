@@ -35,7 +35,7 @@ view/data/hsms:
         // echo '<img src="../app/views/res/logo.png" />';
         echo '<div id="content">
 
-        <h2 id="module_title">Pregled humanitarmih akcija</h2>
+        <h2 id="module_title">Pregled humanitarnih akcija</h2>
 
         <div id="rt_search">
           <form id="search_form">
