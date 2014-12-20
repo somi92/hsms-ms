@@ -116,7 +116,6 @@
 					$data["organisations"][] = $org;
 
 				}
-
 			}
 			return json_encode($data["organisations"]);
 		}
@@ -150,6 +149,36 @@
 			$result = self::loadAllHSMS();
 			return json_encode($result["actions"]);
 
+		}
+
+		public static function liveSearch($key) {
+			
+			require_once "../app/models/Organisation.php";
+
+			$db = new DatabaseManager();
+			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			$sql = "select org_id, naziv, opis, website from ORGANIZACIJA where
+					naziv like '%".$key."%' order by naziv;";
+			$result = $db->executeQuery($sql);
+
+			if(!$result->num_rows) {
+				$data = NULL;
+			} else {
+				while($row = $result->fetch_object()) {
+					
+					$org = new Organisation();
+					
+					$org->setId($row->org_id);
+					$org->setName($row->naziv);
+					$org->setDesc($row->opis);
+					$org->setWeb($row->website);
+
+					$data["organisations"][] = $org;
+
+				}
+			}
+			return json_encode($data["organisations"]);
 		}
 	}
 

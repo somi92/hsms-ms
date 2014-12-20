@@ -45,13 +45,13 @@ form p {
 	font-family:raleway	
 }
 
-h2 {
+/*h2 {
 	background-color:#FEFFED;
 	padding:20px 35px;
 	margin:-10px -50px;
 	text-align:center;
 	border-radius:10px 10px 0 0
-}
+}*/
 
 hr {
 	margin:10px -50px;
@@ -67,6 +67,16 @@ input[type=text] {
 	padding-left:10px;
 	font-size:15px;
 	font-family:raleway
+}
+
+#search_key {
+	margin-top: 0px;
+}
+
+#search_form {
+	border: 0px solid black;
+	height: 10%;
+	padding: 0 0 0 10;
 }
 
 #name {
@@ -187,6 +197,10 @@ button:hover {
 	background-color: white;
 }
 
+#table_container {
+	
+}
+
 #footer {
 	border: 5px solid red;
 	width: 100%;
@@ -196,4 +210,43 @@ button:hover {
 	border-radius: 10px;
 	text-align: center;
 	background-color: white;
+}
+
+#rt_search {
+	float: right;
+	/*border: 3px solid blue;*/
+	height: 100%;
+	margin-bottom: 2%;
+	margin-top: 0px;
+	margin-right: 7%;
+}
+
+#search_live {
+	position: absolute;
+	display: inline-block;
+	border: 1px solid white;
+	background-color: white;
+	/*width: 30%;*/
+	/*height: 30px;*/
+	padding-left: 10px;
+	display: none;
+	float: left;
+	margin-top: 2%;
+	z-index: 10;
+}
+
+#search_live a {
+	text-decoration: none;
+	color: black;
+}
+
+#search_live a:hover {
+	text-decoration: none;
+	color: red;
+}
+
+#module_title {
+	float: left;
+	display: inline-block;
+	margin: 0% 0% 2% 2%;
 }

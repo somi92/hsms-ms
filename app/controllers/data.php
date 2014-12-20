@@ -110,6 +110,18 @@
 				ModelBroker::delete($table,$id);
 			}
 		}
+
+		public function livesearch() {
+			if(!isset($_POST['search_key'])) {
+				echo "ERROR";
+				return;
+			} else {
+				$result = $_POST['search_key'];
+				
+				$this->getModel('ModelBroker');
+				echo ModelBroker::liveSearch($result);
+			}
+		}
 	}
 
 ?>

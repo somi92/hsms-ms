@@ -188,6 +188,42 @@ $(document).ready(function() {
   			btn_submit.innerHTML = "IZMENI";
 		}
 	});
+
+  $("#search_key").keyup(function() {
+    var key = $("#search_key").val();
+    var searchLive = document.getElementById("search_live");
+    while (searchLive.firstChild) {
+            searchLive.removeChild(searchLive.firstChild);
+          }
+    if(key.length != 0) {
+      $.post("/HSMS-MS/public/data/livesearch", {
+      search_key: key
+      }, function(res){
+        var obj = jQuery.parseJSON(res);
+        $("#search_live").show();
+        if(obj != null) {
+          for(var i=0; i<obj.length; i++) {
+            var node = document.createElement("a");
+            node.setAttribute("href", obj[i]['web']);
+            node.setAttribute("target", "_blank");
+            var textNode = document.createTextNode(obj[i]['name']);
+            node.appendChild(textNode);
+            var breakNode = document.createElement("br");
+            searchLive.appendChild(node);
+            searchLive.appendChild(breakNode);
+          }
+        } else {
+          var nothingFoundNode = document.createElement("p");
+          var textNode = document.createTextNode("Organizacija nije pronađena.");
+          nothingFoundNode.appendChild(textNode);
+          searchLive.appendChild(nothingFoundNode);
+        }
+      });
+    } else {
+      $("#search_live").hide();
+    }
+  });
+
 });
 
 (function( $ ){

@@ -33,7 +33,23 @@ view/data/hsms:
         // echo "Session active, logged in as ".$user->getName();
 
         // echo '<img src="../app/views/res/logo.png" />';
-        echo '<div id="content"><div style="width: 95%; margin: auto; border: blue 0px solid">
+        echo '<div id="content">
+
+        <h2 id="module_title">Pregled humanitarmih akcija</h2>
+
+        <div id="rt_search">
+          <form id="search_form">
+
+            <p>Pretraga povezanih organizacija:</p>
+            <input id="search_key" name="search_key" placeholder="Unesite naziv organizacije" type="text">
+
+          </form>
+          <div id="search_live"></div>
+
+        </div>
+
+        <div id="table_container" style="width: 95%; margin: auto; border: blue 0px solid">
+
             <table id="hsms" class="display compact" cellspacing="0" style="font-size: 15px; z-index: 2;">
             <tbody>';
 
@@ -113,10 +129,10 @@ view/data/hsms:
           <img id="close" src="../../../app/views/res/close.png" height="48" width="48" onclick ="div_hide()">
           <h2>Unesite novu humanitarnu akciju</h2>
           <hr>
-          <input id="desc" name="desc" placeholder="Opis" type="text">
-          <input id="number" name="number" placeholder="Broj" type="text">
-          <input id="price" name="price" placeholder="Cena" type="text">
-          <input id="status" name="status" placeholder="Status" type="text">
+          <input id="desc" class="form_input_text" name="desc" placeholder="Opis" type="text">
+          <input id="number" class="form_input_text" name="number" placeholder="Broj" type="text">
+          <input id="price" class="form_input_text" name="price" placeholder="Cena" type="text">
+          <input id="status" class="form_input_text" name="status" placeholder="Status" type="text">
           <!-- <input id="organisation" name="organisation" placeholder="Organizacija" type="text"> -->
           <p>Organizacija</p>
           
@@ -129,7 +145,7 @@ view/data/hsms:
               <option value="2">drugi</option>
               <option value="3">treci</option>
           </select>
-          <input id="remark" name="remark" placeholder="Napomena" type="text">
+          <input id="remark" class="form_input_text" name="remark" placeholder="Napomena" type="text">
           </br>
           </br>
           <a href="javascript:%20check_empty()" id="submit">Unesi</a>
