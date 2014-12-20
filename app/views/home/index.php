@@ -9,13 +9,15 @@ view/home/index:
 ?>
 <!DOCTYPE html>
 <html lang="en">
+  
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
   <head>
     <title>HSMS Management System</title>
   </head>
 
   <body onload="document.forms[0].reset();">
-
-  	<h1>Dobrodosli</h1>
   	
     <?php
 
@@ -25,11 +27,14 @@ view/home/index:
         $pt->showManagementPanel();
         echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
       } else {
+        echo '<h3 id="welcome">Dobrodošli - HSMS Management system</h3>';
         if($data == "logging") {
-          $data = "Loggin unsuccessful, user not found.";
+          $data = "Prijava je neuspešna, korisnik nije pronađen.";
+          echo $data;
         }
-        echo $data;
+        echo '<div id="login_form">';
         $pt->showLoginForm();
+        echo '</div>';
       }
     ?>
 

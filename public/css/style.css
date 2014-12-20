@@ -30,7 +30,7 @@ div#popupContact {
 	font-family:'Raleway',sans-serif
 }
 
-form {
+#form {
 	max-width:300px;
 	min-width:250px;
 	padding:10px 50px;
@@ -40,7 +40,7 @@ form {
 	background-color:#fff
 }
 
-form p {
+#form p {
 	margin-top:10px;
 	font-family:raleway	
 }
@@ -249,4 +249,27 @@ button:hover {
 	float: left;
 	display: inline-block;
 	margin: 0% 0% 2% 2%;
+}
+
+#login_form {
+	/*display: inline-block;*/
+	width: 300px;
+	height: 100px;
+	border: 2px solid red;
+	margin: auto;
+	margin-top: 30px;
+	padding: 10px 15px 10px 15px;
+	border-radius: 10px;
+	background-color: white;
+}
+
+#login_form input {
+	margin-top: 10px;
+}
+
+#welcome {
+	/*border: 1px solid blue;*/
+	width: 430px;
+	margin: auto;
+	margin-top: 10%;
 }

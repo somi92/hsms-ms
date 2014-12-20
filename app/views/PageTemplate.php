@@ -38,11 +38,12 @@
 		}
 
 		public function showLoginForm() {
-			echo '<form action="/HSMS-MS/public/home/login" method="post">
-						Unesite vas ID:<br>
+			echo '
+					<form action="/HSMS-MS/public/home/login" method="post">
+						Unesite ID:<br>
 						<input type="text" name="userid" value="">
 						<br>
-						<input type="submit" value="Submit">
+						<input type="submit" value="Prijavi se">
 				   </form>';
 		}
 
