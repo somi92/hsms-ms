@@ -11,7 +11,19 @@ view/home/index:
 <html lang="en">
   
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+
+  <?php
+    $uri = $_SERVER['REQUEST_URI'];
+    // echo $uri;
+    $css_link = "";
+    for($i=0; $i<(substr_count($uri, '/')-3); ++$i) {
+      $css_link = $css_link."../";
+      // echo $css_link." ";
+    }
+    // echo $css_link;
+    echo '<link rel="stylesheet" type="text/css" href="'.$css_link.'css/style.css">';
+  ?>
 
   <head>
     <title>HSMS Management System</title>
@@ -23,9 +35,11 @@ view/home/index:
 
       if(isset($_SESSION['auth_user'])) {
         $user = $_SESSION['auth_user'];
-        echo "Session active, logged in as ".$user->getName();
+        // echo "Session active, logged in as ".$user->getName();
+        $pt->showHeader("Session active, logged in as ".$user->getName());
         $pt->showManagementPanel();
-        echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
+        // echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
+        $pt->showFooter();
       } else {
         echo '<h3 id="welcome">Dobrodošli - HSMS Management system</h3>';
         if($data == "logging") {

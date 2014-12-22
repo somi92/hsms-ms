@@ -13,7 +13,7 @@
 								</br>";
 			}
 			echo "<div id='header'>
-					<img id='logo' src=\"../../../app/views/res/logo.png\" alt=\"ERORR\" />
+					<img id='logo' src=\"../../../app/views/res/logo.png\" alt=\"\" />
 					<h1 id='header_title'>HSMS Management System</h1>
 					<div id='user_session'>
 						<p>".$data."</p></br></br></br>
