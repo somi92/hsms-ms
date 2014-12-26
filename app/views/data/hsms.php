@@ -77,7 +77,7 @@ view/data/hsms:
                   </thead>';
 
 
-            $obj = $data["actions"];
+            // $obj = $data["actions"];
             // var_dump($obj);
             // if(is_array($data)) {
 
@@ -119,7 +119,7 @@ view/data/hsms:
   	?>
 
     <script type="text/javascript">
-      var arr = <?php echo json_encode($data["actions"]) ?>;
+      var arr = <?php echo json_encode($data["actions"]); ?>;
     </script>
 
     <div id="abc">
