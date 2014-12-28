@@ -5,13 +5,15 @@
 		// ADD SESSION USER CHECK TO ALL METHODS!!!!!!!!
 		// if not logged in redirect to home
 
-		public function index($param = "") {
-			$this->getView('/data/index', $param);
+		public function index($param = []) {
+			$data = $param ? $param[0] : "";
+			$this->getView('/data/index', $data);
 		}
 
 		public function view($target) {
 			$this->getModel('ModelBroker');
-			if($target == "hsms") {
+			$view_target = $target ? $target[0] : "";
+			if($view_target == "hsms") {
 				$data = ModelBroker::loadAllHSMS();
 				$this->getView('/data/hsms', $data);
 			}

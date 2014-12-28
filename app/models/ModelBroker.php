@@ -180,6 +180,21 @@
 			}
 			return json_encode($data["organisations"]);
 		}
+
+		public static function registerDonator($data) {
+
+			$db = new DatabaseManager();
+			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$num = 0;
+			$name = "";
+			if(isset($data['name'])) {
+				$name = $data['name'];
+			}
+			$sql = "insert into DONATORI values('', '".$name."', '".$data['email']."', ".$num.");";
+			$result = $db->executeQuery($sql);
+
+			return $result;
+		}
 	}
 
 ?>

@@ -26,8 +26,8 @@
 				}
 			}
 
-			$this->params = $url ? array_values($url) : [];
-			
+			$this->params = array($url ? array_values($url) : []);
+
 			call_user_func_array([$this->controller, $this->method], $this->params);
 		}
 

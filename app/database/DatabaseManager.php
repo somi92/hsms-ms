@@ -30,8 +30,7 @@
 		public function executeQuery($sql) {	
 
 			if(!$result = $this->connection->query($sql)) {
-				print_f("Error executing query from database!");
-				exit();
+				return "Error executing query!";
 			}
 
 			$this->connection->close();

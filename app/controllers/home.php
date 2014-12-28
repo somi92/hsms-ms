@@ -4,13 +4,14 @@
 
 	class Home extends Controller {
 
-		public function index($param = "") {
+		public function index($param = []) {
 
 			$user = NULL;
-			$this->getView('home/index', $param);
+			$data = $param ? $param[0] : "";
+			$this->getView('home/index', $data);
 		}
 
-		public function login($param = "") {
+		public function login($param = []) {
 			
 			if(isset($_SESSION)) {
 				session_start();
@@ -22,9 +23,9 @@
 				$this->getModel('ModelBroker');
 				ModelBroker::loadUser($userid);
 				unset($_POST);
-				$param = "logging";
+				$param[0] = "logging";
 				if(!isset($_SESSION['auth_user'])) {
-					header("Location: /HSMS-MS/public/home/index/".$param);
+					header("Location: /HSMS-MS/public/home/index/".$param[0]);
       			} else {
       				header("Location: /HSMS-MS/public/home/index");
       			}

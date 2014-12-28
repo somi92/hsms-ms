@@ -36,7 +36,7 @@ view/home/index:
       if(isset($_SESSION['auth_user'])) {
         $user = $_SESSION['auth_user'];
         // echo "Session active, logged in as ".$user->getName();
-        $pt->showHeader("Session active, logged in as ".$user->getName());
+        $pt->showHeader("Sesija aktivna, prijavljeni ste kao ".$user->getName());
         $pt->showManagementPanel();
         // echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
         $pt->showFooter();
