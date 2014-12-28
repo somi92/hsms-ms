@@ -5,8 +5,13 @@
 		public function listhsms($param="") {
 			$this->getModel('ModelBroker');
 			$data = "";
-			if(isset($param[0]) && $param[0]=="eur:true") {
-				$data = ModelBroker::loadAllHSMS("true");
+			if(isset($param[0]) && ($param[0]=="eur:true" || $param[0]=="usd:true")) {
+				if($param[0]=="eur:true") {
+					$data = ModelBroker::loadAllHSMS("eur");
+				}
+				if($param[0]=="usd:true") {
+					$data = ModelBroker::loadAllHSMS("usd");
+				}
 			} else {
 				$data = ModelBroker::loadAllHSMS();
 			}
