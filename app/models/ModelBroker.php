@@ -4,7 +4,14 @@
 	require_once "../app/database/DatabaseManager.php";
 
 	// class used to delegate call to Database Manager
+
+	/*
+		https://developer.yahoo.com/yql/console/?q=show%20tables&env=store://datatables.org/alltableswithkeys#h=select+*+from+yahoo.finance.xchange+where+pair+in+(%22EURRSD%22)
+		https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22EURRSD%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=
+	*/
 	class ModelBroker {
+
+		private static $rsd_to_eur = 0;
 
 		public static function loadUser($id) {
 
@@ -33,7 +40,7 @@
 			}
 		}
 
-		public static function loadAllHSMS() {
+		public static function loadAllHSMS($convertToEur = "") {
 
 			require_once "../app/models/HSMS.php";
 
@@ -56,7 +63,15 @@
 					$hsms->setId($row->hb_id);
 					$hsms->setDesc($row->opis);
 					$hsms->setNumber($row->broj);
-					$hsms->setPrice($row->cena);
+
+					if($convertToEur == "true") {
+						$a = explode(" ", $row->cena);
+						$amount = intval($a[0]);
+						$hsms->setPrice(self::convertRSDtoEUR($amount));
+					} else {
+						$hsms->setPrice($row->cena);
+					}
+
 					$hsms->setStatus($row->hb_status);
 					$hsms->setOrganisation($row->naziv);
 					$hsms->setWeb($row->website);
@@ -215,6 +230,24 @@
 			$result = $db->executeQuery($sql);
 
 			return $result;
+		}
+
+		public function convertRSDtoEUR($rsd) {
+			if(self::$rsd_to_eur == 0) {
+				$url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22EURRSD%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+				$curl = curl_init($url);
+				// curl_setopt($curl, CURLOPT_PROXY, 'proxy.fon.rs:8080');
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($curl, CURLOPT_POST, false);
+
+				$response = curl_exec($curl);
+				curl_close($curl);
+
+				$result = json_decode($response);
+				self::$rsd_to_eur = intval($result->query->results->rate->Rate);
+			}
+
+			return round($rsd/self::$rsd_to_eur, 2)." eur";
 		}
 	}
 

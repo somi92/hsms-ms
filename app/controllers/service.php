@@ -4,7 +4,12 @@
 
 		public function listhsms($param="") {
 			$this->getModel('ModelBroker');
-			$data = ModelBroker::loadAllHSMS();
+			$data = "";
+			if(isset($param[0]) && $param[0]=="eur:true") {
+				$data = ModelBroker::loadAllHSMS("true");
+			} else {
+				$data = ModelBroker::loadAllHSMS();
+			}
 			header("Content-Type: application/json; charset=utf-8");
 			echo json_encode($data);
 		}
@@ -111,6 +116,13 @@
 				$res['status'] = "DELETE ".$post_vars['a'];
 				echo json_encode($res);
 			}
+		}
+
+		public function testC($param) {
+			$this->getModel('ModelBroker');
+			$result = ModelBroker::convertRSDtoEUR(intval($param[0]));
+			$res['status'] = $result;
+			echo json_encode($res);
 		}
 
 	}
