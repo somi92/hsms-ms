@@ -195,6 +195,27 @@
 
 			return $result;
 		}
+
+		public static function updateDonator($email_target, $name) {
+			$db = new DatabaseManager();
+			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			$sql = "update DONATORI set ime_prezime = '".$name."' where email = '".$email_target."';";
+			$result = $db->executeQuery($sql);
+
+			return $result;
+		}
+
+		public function donate($email, $id) {
+
+			$db = new DatabaseManager();
+			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			$sql = "insert into DONACIJE (email, hb_id) values ('".$email."',".$id.");";
+			$result = $db->executeQuery($sql);
+
+			return $result;
+		}
 	}
 
 ?>

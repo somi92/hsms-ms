@@ -53,14 +53,13 @@ create table DONATORI (
 
 create table DONACIJE (
 
-  don_id int(7) NOT NULL,
+  email varchar(30) NOT NULL,
   hb_id int(7) NOT NULL,
   date_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  ukupna_uplata decimal(7,2),
  
-  constraint DONACIJE_PK primary key (don_id,hb_id,date_time),
-  constraint DONACIJE_FK1 foreign key (don_id)
-    references DONATORI (don_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+  constraint DONACIJE_PK primary key (email,hb_id,date_time),
+  constraint DONACIJE_FK1 foreign key (email)
+    references DONATORI (email) ON UPDATE CASCADE ON DELETE RESTRICT,
   constraint DONACIJE_FK2 foreign key (hb_id)
     references HUMANITARNI_BROJ (hb_id) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET utf8   
