@@ -12,11 +12,11 @@ view/data/hsms:
 <!DOCTYPE html>
 <html lang="en">
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="../../../public/res/DataTables-1.10.4/media/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="../../../public/css/style.css">
   <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
-  <script type="text/javascript" charset="utf8" src="../../../public/js/script.js"></script>
+  <script type="text/javascript" charset="utf8" src="../../../public/res/DataTables-1.10.4/media/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="../../../public/js/hsms_script.js"></script>
 
   <head>
     <title>HSMS Management System</title>

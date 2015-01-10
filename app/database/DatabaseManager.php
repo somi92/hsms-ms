@@ -29,6 +29,11 @@
 
 		public function executeQuery($sql) {	
 
+			if($sql == "") {
+				$this->connection->close();
+				return;
+			}
+
 			if(!$result = $this->connection->query($sql)) {
 				return "Error executing query!";
 			}

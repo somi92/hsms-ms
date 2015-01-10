@@ -17,6 +17,9 @@
 				$data = ModelBroker::loadAllHSMS();
 				$this->getView('/data/hsms', $data);
 			}
+			if($view_target == "donations") {
+				$this->getView('/data/donations');
+			}
 		}
 
 		public function query() {
@@ -123,6 +126,12 @@
 				$this->getModel('ModelBroker');
 				echo ModelBroker::liveSearch($result);
 			}
+		}
+
+		public function loaddonations($param = "") {
+			$this->getModel('ModelBroker');
+			// echo var_dump($param);
+			echo ModelBroker::loadDonations();
 		}
 	}
 

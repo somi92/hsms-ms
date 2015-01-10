@@ -53,12 +53,12 @@ create table DONATORI (
 
 create table DONACIJE (
 
-  email varchar(30) NOT NULL,
+  d_email varchar(30) NOT NULL,
   hb_id int(7) NOT NULL,
   date_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  
-  constraint DONACIJE_PK primary key (email,hb_id,date_time),
-  constraint DONACIJE_FK1 foreign key (email)
+  constraint DONACIJE_PK primary key (d_email,hb_id,date_time),
+  constraint DONACIJE_FK1 foreign key (d_email)
     references DONATORI (email) ON UPDATE CASCADE ON DELETE RESTRICT,
   constraint DONACIJE_FK2 foreign key (hb_id)
     references HUMANITARNI_BROJ (hb_id) ON UPDATE CASCADE ON DELETE RESTRICT

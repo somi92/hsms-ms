@@ -24,7 +24,7 @@ view/data/index:
 	        echo "Session active, logged in as ".$user->getName();
 
 	        echo '</br></br></br><a href="/HSMS-MS/public/data/view/hsms">Humanitarne akcije</a>';
-	        echo '</br><a href="/HSMS-MS/public/data/view/org">Organizacije</a>';
+	        echo '</br><a href="/HSMS-MS/public/data/view/donations">Donacije</a>';
 	        echo '</br><a href="/HSMS-MS/public/data/view/users">Upravljanje korisnicima</a>';
 
 	        echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';

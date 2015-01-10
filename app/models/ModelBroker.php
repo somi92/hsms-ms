@@ -228,7 +228,7 @@
 			$db = new DatabaseManager();
 			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
 
-			$sql = "insert into DONACIJE (email, hb_id) values ('".$email."',".$id.");";
+			$sql = "insert into DONACIJE (d_email, hb_id) values ('".$email."',".$id.");";
 			$result = $db->executeQuery($sql);
 
 			return $result;
@@ -272,6 +272,7 @@
 				return round($rsd/self::$rsd_to_usd, 2)." usd";
 			}
 		}
+
 	}
 
 ?>
