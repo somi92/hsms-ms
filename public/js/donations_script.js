@@ -9,7 +9,7 @@ $("#donations").dataTable({
             { "title": "Cena" },
             { "title": "Datum i vreme" } 
         ],
-    "ajax": "/HSMS-MS/DTSSPHandler.php",  
+    "ajax": "/HSMS-MS/public/data/loaddonations",  
  	"processing": true,
 	"serverSide": true,
 	"language": {
