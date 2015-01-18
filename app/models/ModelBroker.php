@@ -297,7 +297,7 @@
 			);
 
 			echo json_encode(
-				MySSP::simple_custom( $_GET, $sql_details, $table, $primary_key, $columns, $joinQuery )
+				MySSP::my_simple( $_GET, $sql_details, $table, $primary_key, $columns, $joinQuery )
 			);
 		}
 

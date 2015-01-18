@@ -4,7 +4,7 @@
 
 	class MySSP extends SSP {
 
-		static function simple_custom ( $request, $sql_details, $table, $primaryKey, $columns, $joinQuery) {
+		static function my_simple( $request, $sql_details, $table, $primaryKey, $columns, $joinQuery) {
 			$bindings = array();
 			$db = self::sql_connect( $sql_details );
 
