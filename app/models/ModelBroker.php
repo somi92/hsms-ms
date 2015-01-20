@@ -273,6 +273,45 @@
 			}
 		}
 
+		public function donationStats($param) {
+
+			$db = new DatabaseManager();
+			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			$target[0] = "";
+			$target[1] = "";
+			if($param == "donators") {
+				$target[0] = "d_email";
+				$target[1] = "dn.ime_prezime";
+			}
+			if($param == "hsms") {
+				$target[0] = "hb_id";
+				$target[1] = "hb.opis";
+			}
+
+			$sql = "SELECT dnc.".$target[0]." AS id, ".$target[1]." AS descr, count(dnc.".$target[0].") AS counter FROM 
+					DONACIJE dnc JOIN HUMANITARNI_BROJ hb ON (dnc.hb_id = hb.hb_id) JOIN 
+					DONATORI dn ON (dn.email = dnc.d_email) GROUP BY dnc.".$target[0].";";
+			$result = $db->executeQuery($sql);
+			$data = [];
+			if(!$result->num_rows) {
+				$data = NULL;
+			} else {
+				while($row = $result->fetch_object()) {
+					
+					$item = [];
+
+					$item["id"] = $row->id;
+					$item["desc"] = $row->descr;
+					$item["count"] = $row->counter;
+
+					$data["stats"][] = $item;
+				}
+			}
+
+			return $data;
+		}
+
 		public function loadDonations() {
 			require_once "MySSP.php";
 

@@ -130,6 +130,25 @@
 			echo json_encode($res);
 		}
 
+		public function donationstats($param = "") {
+			$target = explode(":",$param[0]);
+			if($target[0] != "target" || ($target[1] != "donators" && $target[1] != "hsms")) {
+				$res['status'] = "Error: invalid parameter.";
+				echo json_encode($res);
+				return;
+			}
+			$this->getModel('ModelBroker');
+			$result = ModelBroker::donationStats($target[1]);
+			// if($result != 1) {
+			// 	$res['status'] = "Error: invalid parameter.";
+			// } else {
+			// 	$res = $result;
+			// }
+			header("Content-Type: application/json; charset=utf-8");
+			echo json_encode($result);
+			// echo $result;
+		}
+
 	}
 
 ?>
