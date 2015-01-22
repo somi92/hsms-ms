@@ -149,6 +149,13 @@
 			// echo $result;
 		}
 
+		public function organisations() {
+			$this->getModel('ModelBroker');
+			$result = ModelBroker::getOrgs();
+			header("Content-Type: application/json; charset=utf-8");
+			echo json_encode($result);
+		}
+
 	}
 
 ?>

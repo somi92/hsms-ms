@@ -280,16 +280,20 @@
 
 			$target[0] = "";
 			$target[1] = "";
+			$target[2] = "";
 			if($param == "donators") {
 				$target[0] = "d_email";
 				$target[1] = "dn.ime_prezime";
+				$target[2] = "";
 			}
 			if($param == "hsms") {
 				$target[0] = "hb_id";
 				$target[1] = "hb.opis";
+				$target[2] = ", hb.broj AS num ";
 			}
 
-			$sql = "SELECT dnc.".$target[0]." AS id, ".$target[1]." AS descr, count(dnc.".$target[0].") AS counter FROM 
+			$sql = "SELECT dnc.".$target[0]." AS id, ".$target[1]." AS descr, count(dnc.".$target[0].") 
+					AS counter ".$target[2]." FROM 
 					DONACIJE dnc JOIN HUMANITARNI_BROJ hb ON (dnc.hb_id = hb.hb_id) JOIN 
 					DONATORI dn ON (dn.email = dnc.d_email) GROUP BY dnc.".$target[0].";";
 			$result = $db->executeQuery($sql);
@@ -304,12 +308,48 @@
 					$item["id"] = $row->id;
 					$item["desc"] = $row->descr;
 					$item["count"] = $row->counter;
+					if($target[2] != "") {
+						$item["num"] = $row->num;
+					}
 
 					$data["stats"][] = $item;
 				}
 			}
 
 			return $data;
+		}
+
+		public function getOrgs() {
+
+			$data = array();
+			$org = array();
+
+			$locations = [[44.817208,20.420182], [44.819944,20.470737], [44.806071,20.460241],
+							[44.822128,20.469718], [44.310126,20.553382]];
+
+			$db = new DatabaseManager();
+			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			$sql = "select * from ORGANIZACIJA order by org_id;";
+
+			$result = $db->executeQuery($sql);
+			if(!$result->num_rows) {
+				$data = NULL;
+			} else {
+				$counter = 0;
+				while($row = $result->fetch_object()) {
+					
+					$org["id"] = $row->org_id;
+					$org["name"] = $row->naziv;
+					$org["desc"] = $row->opis;
+					$org["web"] = $row->website;
+					$org["loc"] = $locations[$counter];
+
+					$data["organisations"][] = $org;
+					$counter++;
+				}
+			}
+			return $data["organisations"];
 		}
 
 		public function loadDonations() {
