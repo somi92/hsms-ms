@@ -22,11 +22,11 @@ view/data/hsms:
     <script type="text/javascript" charset="utf8" src="../../../public/res/DataTables-1.10.4/media/js/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="../../../public/res/DataTables-1.10.4/media/css/jquery.dataTables.min.css">
     <script type="text/javascript" charset="utf8" src="../../../public/res/DataTables-1.10.4/media/js/jquery.dataTables.min.js"></script>
-    <script src="../../../public/res/DataTables-1.10.4/extensions/Plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <!--<script src="../../../public/res/DataTables-1.10.4/extensions/Plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
     <link rel="stylesheet" href="../../../public/res/DataTables-1.10.4/extensions/Plugins/integration/bootstrap/3/dataTables.bootstrap.css">
     <link rel="stylesheet" href="../../../public/res/bs/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../public/res/bs/css/bootstrap-theme.min.css">
-    <script src="../../../public/res/bs/js/bootstrap.min.js"></script>
+    <script src="../../../public/res/bs/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" type="text/css" href="../../../public/css/style.css">
 
     <script type="text/javascript" charset="utf8" src="../../../public/js/hsms_script.js"></script>
