@@ -21,9 +21,14 @@
 
 			$user = new User();
 			$db = new DatabaseManager();
-			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
 
-			$sql = 'SELECT id, ime, prezime, website FROM USERS WHERE id="'.$id.'";';
+			if (get_magic_quotes_gpc()) {
+				$id = stripslashes($id);
+			}	
+			$f_id = mysqli_real_escape_string($conn, $id);
+
+			$sql = 'SELECT id, ime, prezime, website FROM USERS WHERE id="'.$f_id.'";';
 			$result = $db->executeQuery($sql);
 
 			if(!$result->num_rows) {
@@ -95,7 +100,27 @@
 		public static function insertHSMS($targetTable, $data) {
 
 			$db = new DatabaseManager();
-			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			if (get_magic_quotes_gpc()) {
+				$targetTable = stripslashes($targetTable);
+				$data['desc'] = stripslashes($data['desc']);
+				$data['number'] = stripslashes($data['number']);
+				$data['price'] = stripslashes($data['price']);
+				$data['status'] = stripslashes($data['status']);
+				$data['priority'] = stripslashes($data['priority']);
+				$data['remark'] = stripslashes($data['remark']);
+				$data['organisation'] = stripslashes($data['organisation']);
+			}	
+
+			$targetTable = mysqli_real_escape_string($conn, $targetTable);
+			$data['desc'] = mysqli_real_escape_string($conn, $data['desc']);
+			$data['number'] = mysqli_real_escape_string($conn, $data['number']);
+			$data['price'] = mysqli_real_escape_string($conn, $data['price']);
+			$data['status'] = mysqli_real_escape_string($conn, $data['status']);
+			$data['priority'] = mysqli_real_escape_string($conn, $data['priority']);
+			$data['remark'] = mysqli_real_escape_string($conn, $data['remark']);
+			$data['organisation'] = mysqli_real_escape_string($conn, $data['organisation']);
 
 			$sql = "insert into ". 
 				$targetTable." values ".
@@ -113,7 +138,12 @@
 
 			$data = array();
 			$db = new DatabaseManager();
-			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			if (get_magic_quotes_gpc()) {
+				$targetTable = stripslashes($targetTable);
+			}	
+			$targetTable = mysqli_real_escape_string($conn, $targetTable);
 
 			$sql = "select * from ".$targetTable." order by org_id;";
 
@@ -140,7 +170,15 @@
 		public static function delete($targetTable, $rowId) {
 
 			$db = new DatabaseManager();
-			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			if (get_magic_quotes_gpc()) {
+				$targetTable = stripslashes($targetTable);
+				$rowId = stripslashes($rowId);
+			}
+
+			$targetTable = mysqli_real_escape_string($conn, $targetTable);
+			$rowId = mysqli_real_escape_string($conn, $rowId);
 
 			$sql = "delete from ".$targetTable." where hb_id = ".$rowId.";";
 
@@ -153,7 +191,29 @@
 		public static function updateHSMS($targetTable, $data) {
 
 			$db = new DatabaseManager();
-			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			if (get_magic_quotes_gpc()) {
+				$targetTable = stripslashes($targetTable);
+				$data['desc'] = stripslashes($data['desc']);
+				$data['number'] = stripslashes($data['number']);
+				$data['price'] = stripslashes($data['price']);
+				$data['status'] = stripslashes($data['status']);
+				$data['priority'] = stripslashes($data['priority']);
+				$data['remark'] = stripslashes($data['remark']);
+				$data['organisation'] = stripslashes($data['organisation']);
+				$data['id'] = stripslashes($data['id']);
+			}
+
+			$targetTable = mysqli_real_escape_string($conn, $targetTable);
+			$data['desc'] = mysqli_real_escape_string($conn, $data['desc']);
+			$data['number'] = mysqli_real_escape_string($conn, $data['number']);
+			$data['price'] = mysqli_real_escape_string($conn, $data['price']);
+			$data['status'] = mysqli_real_escape_string($conn, $data['status']);
+			$data['priority'] = mysqli_real_escape_string($conn, $data['priority']);
+			$data['remark'] = mysqli_real_escape_string($conn, $data['remark']);
+			$data['organisation'] = mysqli_real_escape_string($conn, $data['organisation']);
+			$data['id'] = mysqli_real_escape_string($conn, $data['id']);
 			
 			$sql = "update ".$targetTable." set 
 					opis = '".$data['desc']."', broj = '".$data['number']."',
@@ -161,6 +221,7 @@
 					prioritet = ".$data['priority'].", napomena = '".$data['remark']."',
 					org_id = ".$data['organisation']."
 					where hb_id = ".$data['id'].";";
+
 			$db->executeQuery($sql);
 
 			$result = self::loadAllHSMS();
@@ -173,7 +234,12 @@
 			require_once "../app/models/Organisation.php";
 
 			$db = new DatabaseManager();
-			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			if (get_magic_quotes_gpc()) {
+				$key = stripslashes($key);
+			}
+			$key = mysqli_real_escape_string($conn, $key);
 
 			$sql = "select org_id, naziv, opis, website from ORGANIZACIJA where
 					naziv like '%".$key."%' order by naziv;";
@@ -201,12 +267,20 @@
 		public static function registerDonator($data) {
 
 			$db = new DatabaseManager();
-			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
 			$num = 0;
 			$name = "";
 			if(isset($data['name'])) {
 				$name = $data['name'];
 			}
+
+			if (get_magic_quotes_gpc()) {
+				$name = stripslashes($name);
+				$data['email'] = stripslashes($data['email']);
+			}
+			$name = mysqli_real_escape_string($conn, $name);
+			$data['email'] = mysqli_real_escape_string($conn, $data['email']);
+
 			$sql = "insert into DONATORI values('', '".$name."', '".$data['email']."', ".$num.");";
 			$result = $db->executeQuery($sql);
 
@@ -215,7 +289,14 @@
 
 		public static function updateDonator($email_target, $name) {
 			$db = new DatabaseManager();
-			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			if (get_magic_quotes_gpc()) {
+				$email_target = stripslashes($email_target);
+				$name = stripslashes($name);
+			}
+			$email_target = mysqli_real_escape_string($conn, $email_target);
+			$name = mysqli_real_escape_string($conn, $name);
 
 			$sql = "update DONATORI set ime_prezime = '".$name."' where email = '".$email_target."';";
 			$result = $db->executeQuery($sql);
@@ -226,7 +307,14 @@
 		public function donate($email, $id) {
 
 			$db = new DatabaseManager();
-			$db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			if (get_magic_quotes_gpc()) {
+				$email = stripslashes($email);
+				$id = stripslashes($id);
+			}
+			$email = mysqli_real_escape_string($conn, $email);
+			$id = mysqli_real_escape_string($conn, $id);
 
 			$sql = "insert into DONACIJE (d_email, hb_id) values ('".$email."',".$id.");";
 			$result = $db->executeQuery($sql);
