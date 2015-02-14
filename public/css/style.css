@@ -225,7 +225,7 @@ button:hover {
 	position: absolute;
 	display: inline-block;
 	border: 1px solid white;
-	background-color: white;
+	background-color: #DEDEDE;
 	/*width: 30%;*/
 	/*height: 30px;*/
 	padding-left: 10px;
