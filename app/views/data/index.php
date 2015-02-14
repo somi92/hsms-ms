@@ -9,25 +9,38 @@ view/data/index:
 ?>
 <!DOCTYPE html>
 <html lang="en">
+  
+  <meta charset="utf-8">
+  <?php
+    $uri = $_SERVER['REQUEST_URI'];
+    // echo $uri;
+    $css_link = "";
+    for($i=0; $i<(substr_count($uri, '/')-3); ++$i) {
+      $css_link = $css_link."../";
+      // echo $css_link." ";
+    }
+    // echo $css_link;
+    echo '<link rel="stylesheet" type="text/css" href="'.$css_link.'css/style.css">';
+  ?>
+
   <head>
     <title>HSMS Management System</title>
   </head>
 
   <body>
 
-  	<h1>Data Management</h1>
-  	
   	<?php 
 
   		if(isset($_SESSION['auth_user'])) {
 	        $user = $_SESSION['auth_user'];
-	        echo "Session active, logged in as ".$user->getName();
+          $pt->showHeader("Korisnik: ".$user->getName());
 
-	        echo '</br></br></br><a href="/HSMS-MS/public/data/view/hsms">Humanitarne akcije</a>';
-	        echo '</br><a href="/HSMS-MS/public/data/view/donations">Donacije</a>';
-	        echo '</br><a href="/HSMS-MS/public/data/view/users">Upravljanje korisnicima</a>';
+	        echo '</br></br></br><a style="text-decoration: none; color: white;" href="/HSMS-MS/public/data/view/hsms"><button style="height: 100px; font-size: 30px;">Humanitarne akcije</button></a>';
+	        echo '<a style="text-decoration: none; color: white;" href="/HSMS-MS/public/data/view/donations"><button style="height: 100px; font-size: 30px;">Donacije</button></a>';
+	        echo '<a style="text-decoration: none; color: white;" href="/HSMS-MS/public/data/view/users"><button style="height: 100px; font-size: 30px;">Upravljanje korisnicima</button></a>';
 
-	        echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
+          $pt->showFooter();
+
 	     } else {
 	      	echo '</br><p>Nemate pristup.</p>';
 	      	echo '</br><a href="/HSMS-MS/public/home/index">Login</a>';
