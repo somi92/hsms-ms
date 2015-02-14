@@ -1,10 +1,13 @@
 create table USERS (
   
-  id varchar(7),
+  id varchar(255),
+  cpassword varchar(255) character set utf8  NOT NULL,
+  role varchar(128) character set utf8,
   ime varchar(255) character set utf8,
   prezime varchar(255) character set utf8,
   website varchar(255) character set utf8,
-  constraint USERS_PK primary key (id)
+  constraint USERS_PK primary key (id),
+  constraint USERS_ROLE_CHECK check (role in('admin','editor'))
 
 ) DEFAULT CHARACTER SET utf8   
  COLLATE utf8_unicode_ci;

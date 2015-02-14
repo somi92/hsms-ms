@@ -16,12 +16,13 @@
 			if(isset($_SESSION)) {
 				session_start();
 			} else {
-				if(isset($_POST['userid'])) {
+				if(isset($_POST['userid']) && isset($_POST['password'])) {
 				$userid = $_POST['userid'];
+				$password = $_POST['password'];
 				// $user = $this->getModel('ModelBroker');
 				// $user->loadUser($userid);
 				$this->getModel('ModelBroker');
-				ModelBroker::loadUser($userid);
+				ModelBroker::loadUser($userid, $password);
 				unset($_POST);
 				$param[0] = "logging";
 				if(!isset($_SESSION['auth_user'])) {

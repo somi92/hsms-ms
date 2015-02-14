@@ -6,6 +6,7 @@
 	class User {
 
 		private $id;
+		private $role;
 		private $name;
 		private $surname;
 		private $web;
@@ -17,6 +18,14 @@
 
 		public function setID($id) {
 			$this->id = $id;
+		}
+
+		public function getRole() {
+			return $this->role;
+		}
+
+		public function setRole($role) {
+			$this->role = $role;
 		}
 
 		public function getName() {

@@ -36,15 +36,15 @@ view/home/index:
       if(isset($_SESSION['auth_user'])) {
         $user = $_SESSION['auth_user'];
         // echo "Session active, logged in as ".$user->getName();
-        $pt->showHeader("Sesija aktivna, prijavljeni ste kao ".$user->getName());
+        $pt->showHeader("Korisnik: ".$user->getName());
         $pt->showManagementPanel();
         // echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a>';
         $pt->showFooter();
       } else {
-        echo '<h3 id="welcome">Dobrodošli - HSMS Management system</h3>';
+        echo '<h3 id="welcome">Dobrodošli - HSMS Management System</h3>';
         if($data == "logging") {
-          $data = "Prijava je neuspešna, korisnik nije pronađen.";
-          echo $data;
+          $data = "Prijava je neuspešna, korisnik nije pronađen. Pokušajte ponovo.";
+          echo '<p style="margin-left: 37%;">'.$data.'</p>';
         }
         echo '<div id="login_form">';
         $pt->showLoginForm();

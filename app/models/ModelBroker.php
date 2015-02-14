@@ -15,7 +15,7 @@
 		private static $rsd_to_eur = 0;
 		private static $rsd_to_usd = 0;
 
-		public static function loadUser($id) {
+		public static function loadUser($id, $password) {
 
 			require_once "../app/models/User.php";
 
@@ -25,10 +25,13 @@
 
 			if (get_magic_quotes_gpc()) {
 				$id = stripslashes($id);
+				$password = stripslashes($password);
 			}	
 			$f_id = mysqli_real_escape_string($conn, $id);
+			$f_password = mysqli_real_escape_string($conn, $password);
 
-			$sql = 'SELECT id, ime, prezime, website FROM USERS WHERE id="'.$f_id.'";';
+			$sql = 'SELECT id, role, ime, prezime, website FROM USERS WHERE id="'.$f_id.'" 
+					AND cpassword = "'.sha1($f_password).'";';
 			$result = $db->executeQuery($sql);
 
 			if(!$result->num_rows) {
@@ -37,6 +40,7 @@
 				while($row = $result->fetch_object()) {
 					
 					$user->setID($row->id);
+					$user->setRole($row->role);
 					$user->setName($row->ime);
 					$user->setSurname($row->prezime);
 					$user->setWebsite($row->website);
