@@ -33,9 +33,14 @@ view/data/organisations:
         $user = $_SESSION['auth_user'];
         $pt->showHeader("Korisnik: ".$user->getName());
 
+        $message = "";	
+        if($user->getRole() != "admin") {
+        	$message = " (nemate privilegije za menjanje)";
+        }
+
         echo '<div id="content">
 
-        <h2 id="module_title">Pregled povezanih organizacija</h2>
+        <h2 id="module_title">Pregled povezanih organizacija'.$message.'</h2>
 
         <div id="table_container" style="width: 95%; margin: auto; border: blue 0px solid">
 
@@ -55,9 +60,12 @@ view/data/organisations:
         echo '</tbody>
         </table></div>';
 
-        echo '<div id="button_panel"><button id="btn_insert">Dodaj organizaciju</button>';
-        echo '<button id="btn_update">Izmeni</button>';
-        echo '<button id="btn_delete">Obrisi</button></div></div>';
+        if($user->getRole() == "admin") {
+        	echo '<div id="button_panel"><button id="btn_insert">Dodaj organizaciju</button>';
+        	echo '<button id="btn_update">Izmeni</button>';
+        	echo '<button id="btn_delete">Obrisi</button></div>';
+        }
+        echo '</div>';
         $pt->showFooter();
 
       } else {

@@ -8,7 +8,9 @@
 			if($data != "") {
 				$logout = "<a href='/HSMS-MS/public/home/logout'>Logout</a>";
 				$navigation = "<div id='navbar'>
-									<div class='nav_button'><a href='/HSMS-MS/public/home/index'>Pocetna</a>
+									<div class='nav_button'><a href='/HSMS-MS/public/home/index'>Početna</a></div>
+									<div class='nav_button'><a href='/HSMS-MS/public/data/index'>Upravljanje podacima</a></div>
+									<div class='nav_button'><a href='/HSMS-MS/public/data/stats'>Statistički podaci</a></div>
 								</div>
 								</br>";
 			}

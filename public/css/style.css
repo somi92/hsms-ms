@@ -140,7 +140,7 @@ button:hover {
 	padding-top: 1%;
 	padding-bottom: 1%;
 	width: 50%;
-	height: 90%;
+	height: 60%;
 	margin: auto;
 }
 
@@ -189,12 +189,29 @@ button:hover {
 	width: 100%;
 	float: left;
 	border-radius: 5px;
+	margin-bottom: 50px;
 }
 
 .nav_button {
 	float: left;
-	/*border: 1px solid red;*/
-	margin: 10px 5px 0px 5px;
+	border: 5px solid red;
+	border-radius: 10px;
+	margin: 15px 5px 0px 5px;
+	padding: 5px 5px 5px 5px;
+}
+
+.nav_button:hover {
+	background-color: white;
+}
+
+.nav_button a {
+	text-decoration: none;
+	font-size: 22px;
+	color: black;
+}
+
+.nav_button:hover a {
+	color: red;
 }
 
 #content {

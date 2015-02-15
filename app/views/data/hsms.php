@@ -43,12 +43,15 @@ view/data/hsms:
 
         $user = $_SESSION['auth_user'];
         $pt->showHeader("Korisnik: ".$user->getName());
-        // echo "Session active, logged in as ".$user->getName();
+        
+        $message = "";
+        if($user->getRole() != "admin") {
+          $message = " (nemate privilegije za brisanje)";
+        }
 
-        // echo '<img src="../app/views/res/logo.png" />';
         echo '<div id="content">
 
-        <h2 id="module_title">Pregled humanitarnih akcija</h2>
+        <h2 id="module_title">Pregled humanitarnih akcija'.$message.'</h2>
 
         <div id="rt_search">
           <form id="search_form">
@@ -122,7 +125,12 @@ view/data/hsms:
         // $json = json_encode($data);
         echo '<div id="button_panel"><button id="btn_insert">Dodaj novu akciju</button>';
         echo '<button id="btn_update">Izmeni</button>';
-        echo '<button id="btn_delete">Obrisi</button></div></div>';
+        if($user->getRole() == "admin") {
+          echo '<button id="btn_delete">Obrisi</button></div>';
+        } else {
+          echo '</div>';
+        }
+        echo '</div>';
         $pt->showFooter();
         // echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a></div>';
       } else {
