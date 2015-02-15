@@ -20,6 +20,10 @@
 			if($view_target == "donations") {
 				$this->getView('/data/donations');
 			}
+			if($view_target == "organisations") {
+				$data = ModelBroker::query("ORGANIZACIJA");
+				$this->getView("/data/organisations", $data);
+			}
 		}
 
 		public function query() {
@@ -64,6 +68,26 @@
 			echo ModelBroker::insertHSMS("HUMANITARNI_BROJ", $data);
 		}
 
+		public function insertorg() {
+			$data = array();
+			if(!isset($_POST['name']) || !isset($_POST['desc']) || !isset($_POST['web'])) {
+				// ERROR
+				echo "ERROR!";
+				return;
+			}
+			if(isset($_POST['name'])) {
+				$data['name'] = $_POST['name']; 
+			}
+			if(isset($_POST['desc'])) {
+				$data['desc'] = $_POST['desc'];
+			}
+			if(isset($_POST['web'])) {
+				$data['web'] = $_POST['web'];
+			}
+			$this->getModel('ModelBroker');
+			echo ModelBroker::insertOrg("ORGANIZACIJA", $data);
+		}
+
 		public function update() {
 			// call model and update data
 			// call view and update ui
@@ -102,6 +126,30 @@
 			echo ModelBroker::updateHSMS("HUMANITARNI_BROJ", $data);
 		}
 
+		public function updateorg() {
+			$data = array();
+			if(!isset($_POST['id']) || !isset($_POST['name']) || !isset($_POST['desc']) || !isset($_POST['web'])) {
+				// ERROR
+				echo "ERROR!";
+				return;
+			}
+			if(isset($_POST['id'])) {
+				$data['id'] = $_POST['id']; 
+			}
+			if(isset($_POST['name'])) {
+				$data['name'] = $_POST['name']; 
+			}
+			if(isset($_POST['desc'])) {
+				$data['desc'] = $_POST['desc'];
+			}
+			if(isset($_POST['web'])) {
+				$data['web'] = $_POST['web'];
+			}
+
+			$this->getModel('ModelBroker');
+			echo ModelBroker::updateOrg("ORGANIZACIJA", $data);
+		}
+
 		public function delete($data) {
 			// call model and update data
 			// call view and update ui
@@ -112,7 +160,12 @@
 				$table = $_POST['delete_table'];
 				$id = $_POST['delete_id'];
 				$this->getModel('ModelBroker');
-				ModelBroker::delete($table,$id);
+				$ret = ModelBroker::delete($table,$id);
+				if($ret == false) {
+					echo "false";
+				} else {
+					echo "true";
+				}
 			}
 		}
 

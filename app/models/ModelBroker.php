@@ -136,6 +136,30 @@
 			return json_encode($result["actions"]);
 		}
 
+		public static function insertOrg($targetTable, $data) {
+			$db = new DatabaseManager();
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			if (get_magic_quotes_gpc()) {
+				$targetTable = stripslashes($targetTable);
+				$data['name'] = stripslashes($data['name']);
+				$data['desc'] = stripslashes($data['desc']);
+				$data['web'] = stripslashes($data['web']);
+			}	
+
+			$targetTable = mysqli_real_escape_string($conn, $targetTable);
+			$data['name'] = mysqli_real_escape_string($conn, $data['name']);
+			$data['desc'] = mysqli_real_escape_string($conn, $data['desc']);
+			$data['web'] = mysqli_real_escape_string($conn, $data['web']);
+
+			$sql = "insert into ". 
+				$targetTable." values ".
+				"('','".$data['name']."','".$data['desc']."','".$data['web']."')";
+			$db->executeQuery($sql);
+
+			return self::query("ORGANIZACIJA");
+		}
+
 		public static function query($targetTable) {
 			
 			require_once "../app/models/Organisation.php";
@@ -184,7 +208,12 @@
 			$targetTable = mysqli_real_escape_string($conn, $targetTable);
 			$rowId = mysqli_real_escape_string($conn, $rowId);
 
-			$sql = "delete from ".$targetTable." where hb_id = ".$rowId.";";
+			$column = "hb_id";
+			if($targetTable == "ORGANIZACIJA") {
+				$column = "org_id";
+			}
+
+			$sql = "delete from ".$targetTable." where ".$column." = ".$rowId.";";
 
 			if($db->executeQuery($sql) == false) {
 				return false;
@@ -231,6 +260,33 @@
 			$result = self::loadAllHSMS();
 			return json_encode($result["actions"]);
 
+		}
+
+		public static function updateOrg($targetTable, $data) {
+
+			$db = new DatabaseManager();
+			$conn = $db->connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+
+			if (get_magic_quotes_gpc()) {
+				$targetTable = stripslashes($targetTable);
+				$data['name'] = stripslashes($data['name']);
+				$data['desc'] = stripslashes($data['desc']);
+				$data['web'] = stripslashes($data['web']);
+			}
+
+			$targetTable = mysqli_real_escape_string($conn, $targetTable);
+			$data['name'] = mysqli_real_escape_string($conn, $data['name']);
+			$data['desc'] = mysqli_real_escape_string($conn, $data['desc']);
+			$data['web'] = mysqli_real_escape_string($conn, $data['web']);
+
+			$sql = "update ".$targetTable." set 
+					naziv = '".$data['name']."', opis = '".$data['desc']."',
+					website = '".$data['web']."'
+					where org_id = ".$data['id'].";";
+
+			$db->executeQuery($sql);
+
+			return self::query("ORGANIZACIJA");
 		}
 
 		public static function liveSearch($key) {

@@ -33,12 +33,12 @@ view/data/index:
 
   		if(isset($_SESSION['auth_user'])) {
 	        $user = $_SESSION['auth_user'];
-          $pt->showHeader("Korisnik: ".$user->getName());
+          $pt->showHeader("Korisnik: ".$user->getName(), true);
 
 	        echo '</br></br></br><a style="text-decoration: none; color: white;" href="/HSMS-MS/public/data/view/hsms"><button style="height: 100px; font-size: 30px;">Humanitarne akcije</button></a>';
-	        echo '<a style="text-decoration: none; color: white;" href="/HSMS-MS/public/data/view/donations"><button style="height: 100px; font-size: 30px;">Donacije</button></a>';
-	        echo '<a style="text-decoration: none; color: white;" href="/HSMS-MS/public/data/view/users"><button style="height: 100px; font-size: 30px;">Upravljanje korisnicima</button></a>';
-
+	        echo '<a style="text-decoration: none; color: white;" href="/HSMS-MS/public/data/view/organisations"><button style="height: 100px; font-size: 30px;">Organizacije</button></a>';
+          echo '<a style="text-decoration: none; color: white;" href="/HSMS-MS/public/data/view/donations"><button style="height: 100px; font-size: 30px;">Donacije</button></a>';
+	        
           $pt->showFooter();
 
 	     } else {

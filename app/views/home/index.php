@@ -35,7 +35,7 @@ view/home/index:
 
       if(isset($_SESSION['auth_user'])) {
         $user = $_SESSION['auth_user'];
-        $pt->showHeader("Korisnik: ".$user->getName());
+        $pt->showHeader("Korisnik: ".$user->getName(), true);
         $pt->showManagementPanel();
         $pt->showFooter();
       } else {

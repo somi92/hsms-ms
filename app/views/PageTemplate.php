@@ -2,7 +2,7 @@
 
 	class PageTemplate {
 
-		public function showHeader($data = "") {
+		public function showHeader($data = "", $isIndex = false) {
 			$logout = "";
 			$navigation = "";
 			if($data != "") {
@@ -12,8 +12,12 @@
 								</div>
 								</br>";
 			}
+			$src = "../../../app/views/res/logo.png";
+			if($isIndex == true) {
+				$src = "../../app/views/res/logo.png";
+			}
 			echo "<div id='header'>
-					<img id='logo' src=\"../../app/views/res/logo.png\" alt=\"\" />
+					<img id='logo' src=\"".$src."\" alt=\"\" />
 					<h1 id='header_title'>HSMS Management System</h1>
 					<div id='user_session'>
 						<p>".$data."</p></br></br></br>

@@ -214,7 +214,7 @@ button:hover {
 #footer {
 	border: 5px solid red;
 	width: 100%;
-	height: 60px;
+	height: 80px;
 	float: left;
 	margin-top: 2%;
 	border-radius: 10px;
@@ -291,6 +291,21 @@ button:hover {
 
 .man_button {
 	margin-left: 100px;
-	/*border: 1px solid red;*/
+	border: 10px solid white;
 	float: left;
+	/*margin-bottom: 50px;*/
+	padding: 5px 20px 5px 20px;
+	border-radius: 30px;
+}
+
+.man_button p {
+	font-size: 150%;
+}
+
+.man_button:hover {
+	border: 10px solid red;
+}
+
+.man_button:hover p {
+	color: red;
 }

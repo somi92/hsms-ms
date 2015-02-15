@@ -36,7 +36,8 @@
 			}
 
 			if(!$result = $this->connection->query($sql)) {
-				return "Error executing query!";
+				// return "Error executing query!";
+				return false;
 			}
 
 			$this->connection->close();
