@@ -13,6 +13,11 @@
 									<div class='nav_button'><a href='/HSMS-MS/public/data/stats'>Statistički podaci</a></div>
 								</div>
 								</br>";
+			} else {
+				$navigation = "<div id='navbar'>
+									<div class='nav_button'><a href='/HSMS-MS/public/home/index'>Početna</a></div>
+								</div>
+								</br>";
 			}
 			$src = "../../../app/views/res/logo.png";
 			if($isIndex == true) {

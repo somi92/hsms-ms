@@ -39,21 +39,26 @@ view/data/hsms:
 
   	<?php 
 
+      $message = "";
+
   		if(isset($_SESSION['auth_user'])) {
 
         $user = $_SESSION['auth_user'];
         $pt->showHeader("Korisnik: ".$user->getName());
         
-        $message = "";
         if($user->getRole() != "admin") {
           $message = " (nemate privilegije za brisanje)";
         }
-
+      } else {
+        $pt->showHeader();
+      }  
         echo '<div id="content">
 
-        <h2 id="module_title">Pregled humanitarnih akcija'.$message.'</h2>
+        <h2 id="module_title">Pregled humanitarnih akcija'.$message.'</h2>';
+      
+      if(isset($_SESSION['auth_user'])) {
 
-        <div id="rt_search">
+        echo '<div id="rt_search">
           <form id="search_form">
 
             <p>Pretraga povezanih organizacija:</p>
@@ -62,9 +67,10 @@ view/data/hsms:
           </form>
           <div id="search_live"></div>
 
-        </div>
+        </div>';
+      }
 
-        <div id="table_container" style="width: 95%; margin: auto; border: blue 0px solid">
+        echo '<div id="table_container" style="width: 95%; margin: auto; border: blue 0px solid">
 
             <table id="hsms" class="display compact" cellspacing="0" style="font-size: 15px; z-index: 2;">
             <tbody>';
@@ -93,50 +99,25 @@ view/data/hsms:
                   </thead>';
 
 
-            // $obj = $data["actions"];
-            // var_dump($obj);
-            // if(is_array($data)) {
-
-            //   foreach ($obj as $k=>$v) {
-                
-            //     echo '
-            //         <tr>
-            //             <td>'.($k+1).'</td>
-            //             <td>'.$v->getId().'</td>
-            //             <td>'.$v->getDesc().'</td>
-            //             <td>'.$v->getPrice().'</td>
-            //             <td>'.$v->getStatus().'</td>
-            //             <td>'.$v->getOrganisation().'</td>
-            //             <td>'.$v->getWeb().'</td>
-            //             <td>'.$v->getPriority().'</td>
-            //             <td>'.$v->getRemark().'</td>
-            //         </tr>
-            //     ';
-
-            //   }
-
-            // } else {
-
-            // }
+          
 
         echo '</tbody>
         </table></div>';
-        // $obj = $data["actions"];
-        // $json = json_encode($data);
-        echo '<div id="button_panel"><button id="btn_insert">Dodaj novu akciju</button>';
-        echo '<button id="btn_update">Izmeni</button>';
-        if($user->getRole() == "admin") {
-          echo '<button id="btn_delete">Obrisi</button></div>';
-        } else {
-          echo '</div>';
-        }
-        echo '</div>';
-        $pt->showFooter();
-        // echo '</br></br><a href="/HSMS-MS/public/home/logout">Logout</a></div>';
-      } else {
-          $pt->showHeader();
+        
+        if(isset($_SESSION['auth_user'])) {
+
+          $user = $_SESSION['auth_user'];
+          echo '<div id="button_panel"><button id="btn_insert">Dodaj novu akciju</button>';
+          echo '<button id="btn_update">Izmeni</button>';
+          if($user->getRole() == "admin") {
+            echo '<button id="btn_delete">Obrisi</button></div>';
+          } else {
+            echo '</div>';
+          }
       }
-      // $pt->showFooter();
+      echo '</div>';
+      $pt->showFooter();
+
   	?>
 
     <script type="text/javascript">
