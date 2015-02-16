@@ -42,8 +42,8 @@
         		session_start();
         		$_SESSION = array();
 				session_destroy();
-				$param = "Uspešno ste se odjavili.";
-				$this->getView('home/index', $param);
+				$param[0] = "logout";
+				$this->getView('home/index', $param[0]);
     		} 
 		}
 	}

@@ -40,7 +40,11 @@ view/home/index:
         $pt->showFooter();
       } else {
         if($data != "") {
-          $pt->showHeader("", false);
+          if($data == "logout") {
+            $pt->showHeader("", true);
+          } else {
+            $pt->showHeader("", false);
+          }
         } else {
           $pt->showHeader("", true);
         }
@@ -58,6 +62,12 @@ view/home/index:
           echo '<h3 id="welcome">Unesite vaše korisničke podatke</h3>';
           echo '<div id="login_form">';
           $pt->showLoginForm();
+          echo '</div>';
+        }
+        if($data == "" || $data == "logout") {
+          echo '<div id="content">';
+          echo '<h3 style="padding: 10 10 10 10;">Dobrodošli</h3>';
+          $pt->showInfo();
           echo '</div>';
         }
 

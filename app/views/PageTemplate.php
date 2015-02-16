@@ -72,6 +72,14 @@
 				   </form>';
 		}
 
+		public function showInfo() {
+			echo '<p style="padding: 10 10 10 10;">HSMS Management System je web aplikacija za upravljanje bazom humanitarnih SMS brojeva
+				mobilnih operatera. Ova aplikacija omogućava unos novih, ažuriranje i održavanje podataka o humanitarnim
+				akcijama u Srbiji za koje postoje humanitarni SMS brojevi, kao i održavanje podataka o povezanim
+				organizacijama. Ideja je da se podaci web aplikacije izlože kroz REST API kako bi se podaci mogli iskoristiti
+				za razvoj drugih (prvenstveno mobilnih) aplikacija.</p>';
+		}
+
 		public function showTable($data) {
 
 		}
