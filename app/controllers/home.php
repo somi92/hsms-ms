@@ -42,7 +42,7 @@
         		session_start();
         		$_SESSION = array();
 				session_destroy();
-				$param = "You are successfully logged out.";
+				$param = "Uspešno ste se odjavili.";
 				$this->getView('home/index', $param);
     		} 
 		}

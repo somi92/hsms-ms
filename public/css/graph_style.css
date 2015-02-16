@@ -1,0 +1,22 @@
+#panel {
+	margin: auto;
+	width: 1100px;
+	height: 680px;
+	/*border: 1px solid blue;*/
+}
+
+#graph_container {
+	/*border: 3px solid red;*/
+	margin: auto;
+	width: 1050px;
+	height: 600px;
+	float: left;
+}
+
+#graph_buttons {
+	margin: auto;
+	/*border: 3px solid green;*/
+	float: left;
+	width: 80%;
+	margin-left: 20%;
+}

@@ -39,14 +39,29 @@ view/home/index:
         $pt->showManagementPanel();
         $pt->showFooter();
       } else {
-        echo '<h3 id="welcome">Dobrodošli - HSMS Management System</h3>';
+        if($data != "") {
+          $pt->showHeader("", false);
+        } else {
+          $pt->showHeader("", true);
+        }
+        
         if($data == "logging") {
+          echo '<h3 id="welcome">Unesite vaše korisničke podatke</h3>';
           $data = "Prijava je neuspešna, korisnik nije pronađen. Pokušajte ponovo.";
           echo '<p style="margin-left: 37%;">'.$data.'</p>';
+
+          echo '<div id="login_form">';
+          $pt->showLoginForm();
+          echo '</div>';
         }
-        echo '<div id="login_form">';
-        $pt->showLoginForm();
-        echo '</div>';
+        if($data == "admin") {
+          echo '<h3 id="welcome">Unesite vaše korisničke podatke</h3>';
+          echo '<div id="login_form">';
+          $pt->showLoginForm();
+          echo '</div>';
+        }
+
+        $pt->showFooter();
       }
     ?>
 

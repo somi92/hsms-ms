@@ -429,6 +429,8 @@
 			$target[0] = "";
 			$target[1] = "";
 			$target[2] = "";
+			$limit = "LIMIT 10";
+
 			if($param == "donators") {
 				$target[0] = "d_email";
 				$target[1] = "dn.ime_prezime";
@@ -440,10 +442,10 @@
 				$target[2] = ", hb.broj AS num ";
 			}
 
-			$sql = "SELECT dnc.".$target[0]." AS id, ".$target[1]." AS descr, count(dnc.".$target[0].") 
+			$sql = "SELECT * FROM (SELECT dnc.".$target[0]." AS id, ".$target[1]." AS descr, count(dnc.".$target[0].") 
 					AS counter ".$target[2]." FROM 
 					DONACIJE dnc JOIN HUMANITARNI_BROJ hb ON (dnc.hb_id = hb.hb_id) JOIN 
-					DONATORI dn ON (dn.email = dnc.d_email) GROUP BY dnc.".$target[0].";";
+					DONATORI dn ON (dn.email = dnc.d_email) GROUP BY dnc.".$target[0].") AS result ORDER BY counter DESC ".$limit.";";
 			$result = $db->executeQuery($sql);
 			$data = [];
 			if(!$result->num_rows) {

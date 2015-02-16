@@ -10,12 +10,15 @@
 				$navigation = "<div id='navbar'>
 									<div class='nav_button'><a href='/HSMS-MS/public/home/index'>Početna</a></div>
 									<div class='nav_button'><a href='/HSMS-MS/public/data/index'>Upravljanje podacima</a></div>
-									<div class='nav_button'><a href='/HSMS-MS/public/data/stats'>Statistički podaci</a></div>
+									<div class='nav_button'><a href='/HSMS-MS/public/data/view/stats'>Statistički podaci</a></div>
 								</div>
 								</br>";
 			} else {
 				$navigation = "<div id='navbar'>
 									<div class='nav_button'><a href='/HSMS-MS/public/home/index'>Početna</a></div>
+									<div class='nav_button'><a href='/HSMS-MS/public/data/view/hsms'>Humanitarne akcije</a></div>
+									<div class='nav_button'><a href='/HSMS-MS/public/data/view/stats'>Statistički podaci</a></div>
+									<div class='nav_button'><a href='/HSMS-MS/public/home/index/admin'>Administracija</a></div>
 								</div>
 								</br>";
 			}
@@ -50,7 +53,7 @@
 				</div>';
 			echo '<div class="man_button">
 					<p>Statistički podaci</p>
-					<a href="/HSMS-MS/public/data/index"><img src="../../app/views/res/stats.png"></a>
+					<a href="/HSMS-MS/public/data/view/stats"><img src="../../app/views/res/stats.png"></a>
 				</div>';
 			echo '</br></div>';
 		}

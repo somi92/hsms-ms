@@ -1,0 +1,20 @@
+#panel {
+	float: left;
+}
+
+#graph_container {
+
+}
+
+#map_container {
+	float: right;
+	border: 2px red solid;
+	width: 700px;
+	height: 500px;
+	margin-right: 5%;
+}
+
+#map_title {
+	float: right;
+	margin-right: 20%;
+}

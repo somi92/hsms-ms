@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="utf-8">
+  <head>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- // <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+ 
+    <script type="text/javascript">
+    
+	    google.load('visualization', '1.0', {'packages':['corechart']});
+
+	    var chart;
+	    var data;
+	    var flag;
+
+	    function drawGraph(obj, column, title) {
+
+	      data = new google.visualization.DataTable();
+	      data.addColumn('string', column);
+	      data.addColumn('number', 'Broj donacija');
+	      if(column == "Humanitarna akcija") {
+	      	flag = 0;
+	      	data.addColumn('string', 'SMS broj');
+	      	for (var i = 0; i < obj.stats.length; i++) {
+		  		data.addRow([obj.stats[i].desc, parseInt(obj.stats[i].count), obj.stats[i].num]);
+		  	};
+	      } else {
+	      	flag = 1;
+	      	data.addColumn('string', 'Email');
+	      	for (var i = 0; i < obj.stats.length; i++) {
+		  		data.addRow([obj.stats[i].desc, parseInt(obj.stats[i].count), obj.stats[i].id]);
+		  	};
+	      }
+	      
+
+	      var options = {'title': title,
+	      'is3D':false,
+	      'width':1000,
+	      'height':600};
+
+	      chart = new google.visualization.PieChart(document.getElementById('graph_container'));
+		  
+		  google.visualization.events.addListener(chart, 'select', info);
+
+	      chart.draw(data, options);
+	    }
+
+		function info() {
+		  var selectedItem = chart.getSelection()[0];
+		  if (selectedItem) {
+		    var dataType = data.getValue(selectedItem.row, 0);
+		    var count = data.getValue(selectedItem.row, 1);
+		    var inf = data.getValue(selectedItem.row, 2);
+		    if(flag == 0) {
+		    	alert("SMS broja za " + dataType + " je: " + inf);
+		    } else {
+		    	alert("Email donatora " + dataType + ": " + inf);
+		    }
+		  }
+		}
+    </script>
+  </head>
+
+  <body>
+
+	<div id="panel">
+		<div id="graph_container" style="width:400; height:300"></div>
+	    
+	    <button id="btn1" class="buttons">Humanitarne akcije</button>
+		<button id="btn2" class="buttons">Donatori</button>
+	</div>
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+			$.get("http://mywebprojects.com/HSMS-MS/public/service/donationstats/target:hsms", {
+
+			}, function(res){
+				drawGraph(res, "Humanitarna akcija", "Procenat donacija za svaku humanitarnu akciju (kliknite za vise detalja)");
+			});
+			
+		});
+
+		$('#btn1').click(function() {
+			$.get("http://mywebprojects.com/HSMS-MS/public/service/donationstats/target:hsms", {
+
+			}, function(res){
+				drawGraph(res, "Humanitarna akcija", "Procenat donacija za svaku humanitarnu akciju (kliknite za vise detalja)");
+			});
+		});
+
+		$('#btn2').click(function() {
+
+			$.get("http://mywebprojects.com/HSMS-MS/public/service/donationstats/target:donators", {
+
+			}, function(res){
+				drawGraph(res, "Donator", "Procenat donacija po donatorima (kliknite za vise detalja)");
+			});
+		});
+
+	</script>
+  </body>
+</html>

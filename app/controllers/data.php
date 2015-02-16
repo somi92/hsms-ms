@@ -24,6 +24,9 @@
 				$data = ModelBroker::query("ORGANIZACIJA");
 				$this->getView("/data/organisations", $data);
 			}
+			if($view_target == "stats") {
+				$this->getView("/data/stats");
+			}
 		}
 
 		public function query() {
