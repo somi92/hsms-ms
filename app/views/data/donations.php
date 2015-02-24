@@ -11,6 +11,7 @@ view/data/donations:
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
   <meta charset="utf-8">
 
   <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
