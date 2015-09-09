@@ -80,7 +80,7 @@
 		}
 
 		public function updatedonator() {
-			if($_SERVER['REQUEST_METHOD'] == 'PUT') {
+			if($_SERVER['REQUEST_METHOD'] == 'POST') {
 				$this->getModel('ModelBroker');
 				$put_vars = [];
 				parse_str(file_get_contents("php://input"),$put_vars);
