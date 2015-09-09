@@ -376,6 +376,10 @@
 			$email = mysqli_real_escape_string($conn, $email);
 			$id = mysqli_real_escape_string($conn, $id);
 
+			if($email == "" || is_null($email)) {
+				$email = "anonymous_user_no_email";
+			}
+
 			$sql = "insert into DONACIJE (d_email, hb_id) values ('".$email."',".$id.");";
 			$result = $db->executeQuery($sql);
 
