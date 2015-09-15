@@ -94,8 +94,8 @@ function check_empty(action, update_id) {
         { "data": "status"},
         { "data": "organisation"},
         { "data": "web"},
-        { "data": "priority"},
-        { "data": "remark"}],
+        { "data": "priority"}],
+        //{ "data": "remark"}],
 
         searching: false,
         ordering:  false,

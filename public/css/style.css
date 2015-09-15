@@ -326,3 +326,10 @@ button:hover {
 .man_button:hover p {
 	color: red;
 }
+
+#remark {
+	width: 100%;
+	height: 150px;
+	margin-top: 20px;
+
+}

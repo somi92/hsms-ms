@@ -80,7 +80,7 @@ view/data/hsms:
                         
                         <th class="dt-head-left" width="3%">ID</th>
 
-                        <th class="dt-head-left" width="25%">Opis</th>
+                        <th class="dt-head-left" width="40%">Opis</th>
                         
                         <th class="dt-head-left" width="4%">Broj</th>
                         
@@ -94,7 +94,7 @@ view/data/hsms:
                         
                         <th class="dt-head-left" width="3%">Prioritet</th>
                         
-                        <th class="dt-head-left" width="15%">Napomena</th>
+                        <!-- <th class="dt-head-left" width="15%">Napomena</th> -->
                     </tr>
                   </thead>';
 
@@ -147,7 +147,7 @@ view/data/hsms:
               <option value="2">drugi</option>
               <option value="3">treci</option>
           </select>
-          <input id="remark" class="form_input_text" name="remark" placeholder="Napomena" type="text">
+          <textarea id="remark" class="form_input_text" name="remark" placeholder="Napomena" type="text"></textarea>
           </br>
           </br>
           <a href="javascript:%20check_empty()" id="submit">Unesi</a>
